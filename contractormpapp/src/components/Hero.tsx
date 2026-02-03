@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, MapPin, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { triggerMockAction } from '../utils/mockActions';
 export function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
@@ -88,7 +89,9 @@ export function Hero() {
             <label className="block text-xs font-bold text-[#3D3D3D] uppercase tracking-wider mb-1">
               Project Type
             </label>
-            <div className="flex items-center justify-between cursor-pointer group-hover:text-[#D4856A] transition-colors">
+            <div
+              className="flex items-center justify-between cursor-pointer group-hover:text-[#D4856A] transition-colors"
+              onClick={() => triggerMockAction('Pick project type')}>
               <span className="text-[#6B6B6B] text-sm font-medium">
                 Kitchen, Bath, etc.
               </span>
@@ -101,7 +104,9 @@ export function Hero() {
             <label className="block text-xs font-bold text-[#3D3D3D] uppercase tracking-wider mb-1">
               Budget
             </label>
-            <div className="flex items-center justify-between cursor-pointer group-hover:text-[#D4856A] transition-colors">
+            <div
+              className="flex items-center justify-between cursor-pointer group-hover:text-[#D4856A] transition-colors"
+              onClick={() => triggerMockAction('Set budget range')}>
               <span className="text-[#6B6B6B] text-sm font-medium">
                 Estimated range
               </span>
@@ -109,7 +114,9 @@ export function Hero() {
           </div>
 
           {/* Search Button */}
-          <button className="w-full md:w-auto bg-[#D4856A] hover:bg-[#c0765c] text-white p-4 rounded-full transition-all duration-300 flex items-center justify-center group shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+          <button
+            onClick={() => triggerMockAction('Search for pros')}
+            className="w-full md:w-auto bg-[#D4856A] hover:bg-[#c0765c] text-white p-4 rounded-full transition-all duration-300 flex items-center justify-center group shadow-lg hover:shadow-xl hover:-translate-y-0.5">
             <Search className="w-5 h-5" />
             <span className="md:hidden ml-2 font-medium">Search Pros</span>
           </button>

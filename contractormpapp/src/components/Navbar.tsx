@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, Menu, User, Home } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { triggerMockAction } from '../utils/mockActions';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
@@ -27,14 +28,16 @@ export function Navbar() {
 
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer group">
+        <div
+          className="flex items-center gap-2 cursor-pointer group"
+          onClick={() => triggerMockAction('Open Tradestack Marketplace home')}>
           <div className="w-8 h-8 bg-[#D4856A] rounded-lg flex items-center justify-center group-hover:bg-[#c0765c] transition-colors">
             <Home className="w-5 h-5 text-white" />
           </div>
           <span
             className={`text-2xl font-serif font-bold tracking-wide transition-colors ${isScrolled ? 'text-[#3D3D3D]' : 'text-[#3D3D3D] md:text-white'}`}>
 
-            Nest<span className="text-[#D4856A]">well</span>
+            Tradestack<span className="text-[#D4856A]">Market</span>
           </span>
         </div>
 
@@ -45,6 +48,10 @@ export function Navbar() {
             <a
               key={item}
               href="#"
+              onClick={(event) => {
+                event.preventDefault();
+                triggerMockAction(item);
+              }}
               className={`text-sm font-medium tracking-wide transition-colors ${isScrolled ? 'text-[#6B6B6B] hover:text-[#D4856A]' : 'text-white/90 hover:text-white'}`}>
 
                 {item}
@@ -56,12 +63,14 @@ export function Navbar() {
         {/* Right Actions */}
         <div className="flex items-center gap-4">
           <button
+            onClick={() => triggerMockAction('Join as a Pro')}
             className={`hidden md:block px-5 py-2 rounded-full border text-sm transition-colors ${isScrolled ? 'border-[#D4856A] text-[#D4856A] hover:bg-[#D4856A]/10' : 'border-white/40 text-white hover:bg-white/10'}`}>
 
             Join as a Pro
           </button>
 
           <div
+            onClick={() => triggerMockAction('Open account menu')}
             className={`flex items-center gap-2 p-1 pl-3 pr-1 rounded-full border shadow-sm hover:shadow-md transition-all cursor-pointer ${isScrolled ? 'bg-white border-[#E8E4DF]' : 'bg-white/10 border-white/20 backdrop-blur-sm'}`}>
 
             <Menu

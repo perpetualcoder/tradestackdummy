@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { triggerMockAction } from '../utils/mockActions';
 const collections = [
 {
   id: 1,
@@ -47,6 +48,10 @@ export function CuratedCollections() {
         </div>
         <a
           href="#"
+          onClick={(event) => {
+            event.preventDefault();
+            triggerMockAction('View all categories');
+          }}
           className="hidden md:flex items-center gap-2 text-[#D4856A] hover:text-[#c0765c] transition-colors mt-4 md:mt-0 font-medium">
 
           <span className="text-sm uppercase tracking-widest">
@@ -61,6 +66,7 @@ export function CuratedCollections() {
         <motion.div
           key={item.id}
           className={`group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer ${item.colSpan} shadow-sm hover:shadow-xl transition-all duration-500`}
+          onClick={() => triggerMockAction(`Open ${item.title}`)}
           initial={{
             opacity: 0,
             y: 20
@@ -106,6 +112,10 @@ export function CuratedCollections() {
       <div className="mt-8 md:hidden text-center">
         <a
           href="#"
+          onClick={(event) => {
+            event.preventDefault();
+            triggerMockAction('View all categories');
+          }}
           className="inline-flex items-center gap-2 text-[#D4856A] font-medium">
 
           <span className="text-sm uppercase tracking-widest">

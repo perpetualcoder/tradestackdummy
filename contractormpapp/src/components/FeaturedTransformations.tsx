@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { triggerMockAction } from '../utils/mockActions';
 const transformations = [
 {
   id: 1,
@@ -62,13 +63,19 @@ export function FeaturedTransformations() {
 
         <div className="flex gap-3">
           <button
-            onClick={prevSlide}
+            onClick={() => {
+              prevSlide();
+              triggerMockAction('Previous transformation');
+            }}
             className="w-12 h-12 rounded-full border border-[#E8E4DF] bg-white flex items-center justify-center text-[#3D3D3D] hover:bg-[#D4856A] hover:text-white hover:border-[#D4856A] transition-all shadow-sm">
 
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
-            onClick={nextSlide}
+            onClick={() => {
+              nextSlide();
+              triggerMockAction('Next transformation');
+            }}
             className="w-12 h-12 rounded-full border border-[#E8E4DF] bg-white flex items-center justify-center text-[#3D3D3D] hover:bg-[#D4856A] hover:text-white hover:border-[#D4856A] transition-all shadow-sm">
 
             <ChevronRight className="w-5 h-5" />
@@ -79,7 +86,8 @@ export function FeaturedTransformations() {
       <div
         className="relative h-[600px] w-full rounded-3xl overflow-hidden shadow-xl"
         onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}>
+        onMouseLeave={() => setIsPaused(false)}
+        onClick={() => triggerMockAction('Open transformation details')}>
 
         <AnimatePresence mode="wait">
           <motion.div

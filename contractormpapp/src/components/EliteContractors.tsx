@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, CheckCircle, Shield, ArrowRight } from 'lucide-react';
+import { triggerMockAction } from '../utils/mockActions';
 const contractors = [
 {
   id: 1,
@@ -123,7 +124,9 @@ export function EliteContractors() {
                   <span>{contractor.experience} Exp.</span>
                 </div>
 
-                <button className="w-full py-3 bg-[#FDF8F3] border border-[#E8E4DF] rounded-xl text-[#3D3D3D] font-medium text-sm hover:bg-[#D4856A] hover:text-white hover:border-[#D4856A] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                <button
+                  onClick={() => triggerMockAction(`View work: ${contractor.name}`)}
+                  className="w-full py-3 bg-[#FDF8F3] border border-[#E8E4DF] rounded-xl text-[#3D3D3D] font-medium text-sm hover:bg-[#D4856A] hover:text-white hover:border-[#D4856A] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
                   View Work
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                 </button>

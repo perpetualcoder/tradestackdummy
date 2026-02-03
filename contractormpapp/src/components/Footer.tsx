@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Home } from
 'lucide-react';
+import { triggerMockAction } from '../utils/mockActions';
 export function Footer() {
   return (
     <footer className="bg-[#FDF8F3] border-t border-[#E8E4DF] pt-20 pb-10">
@@ -19,7 +20,7 @@ export function Footer() {
                 <Home className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-serif font-bold tracking-wide text-[#3D3D3D]">
-                Nest<span className="text-[#D4856A]">well</span>
+                Tradestack<span className="text-[#D4856A]">Market</span>
               </span>
             </div>
             <p className="text-[#6B6B6B] text-sm leading-relaxed mb-6">
@@ -31,6 +32,10 @@ export function Footer() {
               <a
                 key={i}
                 href="#"
+                onClick={(event) => {
+                  event.preventDefault();
+                  triggerMockAction('Open social channel');
+                }}
                 className="w-10 h-10 rounded-full bg-white border border-[#E8E4DF] flex items-center justify-center text-[#6B6B6B] hover:bg-[#D4856A] hover:text-white hover:border-[#D4856A] transition-all shadow-sm">
 
                   <Icon className="w-4 h-4" />
@@ -55,6 +60,10 @@ export function Footer() {
               <li key={item}>
                   <a
                   href="#"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    triggerMockAction(item);
+                  }}
                   className="text-[#6B6B6B] text-sm hover:text-[#D4856A] transition-colors">
 
                     {item}
@@ -79,6 +88,10 @@ export function Footer() {
               <li key={item}>
                   <a
                   href="#"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    triggerMockAction(item);
+                  }}
                   className="text-[#6B6B6B] text-sm hover:text-[#D4856A] transition-colors">
 
                     {item}
@@ -102,7 +115,9 @@ export function Footer() {
                 placeholder="Email address"
                 className="bg-white border border-[#E8E4DF] border-r-0 rounded-l-lg px-4 py-2 text-sm text-[#3D3D3D] outline-none focus:border-[#D4856A] w-full placeholder-[#9CA3AF]" />
 
-              <button className="bg-[#D4856A] text-white px-4 rounded-r-lg hover:bg-[#c0765c] transition-colors">
+              <button
+                onClick={() => triggerMockAction('Subscribe to newsletter')}
+                className="bg-[#D4856A] text-white px-4 rounded-r-lg hover:bg-[#c0765c] transition-colors">
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -111,13 +126,17 @@ export function Footer() {
 
         <div className="border-t border-[#E8E4DF] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#9CA3AF] text-xs">
-            © 2024 Nestwell Inc. All rights reserved.
+            © 2024 Tradestack Inc. All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy', 'Terms', 'Sitemap'].map((item) =>
             <a
               key={item}
               href="#"
+              onClick={(event) => {
+                event.preventDefault();
+                triggerMockAction(item);
+              }}
               className="text-[#9CA3AF] text-xs hover:text-[#D4856A] transition-colors">
 
                 {item}

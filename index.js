@@ -23,7 +23,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-const marketplaceDir = path.join(__dirname, "contractormpapp", "dist");
+const marketplaceDir = path.join(__dirname, "marketplace");
 const marketplaceIndex = path.join(marketplaceDir, "index.html");
 
 app.use("/marketplace", express.static(marketplaceDir));
