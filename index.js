@@ -1,4 +1,5 @@
 import path from "node:path";
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import pg from "pg";
@@ -21,6 +22,25 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static(__dirname));
+
+const marketplaceDir = path.join(__dirname, "contractormpapp", "dist");
+const marketplaceIndex = path.join(marketplaceDir, "index.html");
+
+app.use("/marketplace", express.static(marketplaceDir));
+app.get("/marketplace", (_req, res) => {
+  if (!fs.existsSync(marketplaceIndex)) {
+    res.status(503).send("Marketplace build not found. Run the build step.");
+    return;
+  }
+  res.sendFile(marketplaceIndex);
+});
+app.get("/marketplace/*", (_req, res) => {
+  if (!fs.existsSync(marketplaceIndex)) {
+    res.status(503).send("Marketplace build not found. Run the build step.");
+    return;
+  }
+  res.sendFile(marketplaceIndex);
+});
 
 app.get("/api/tasks", async (_req, res) => {
   try {

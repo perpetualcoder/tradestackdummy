@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build:marketplace": "npm --prefix contractormpapp install && npm --prefix contractormpapp run build"
   },
   "dependencies": {
     "express": "^4.19.2",
