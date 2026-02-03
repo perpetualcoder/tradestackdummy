@@ -1,42 +1,9 @@
-const STORAGE_KEY = "olive-task-poc-v1";
-
 const statusLabels = {
   todo: "To Do",
   inprogress: "In Progress",
   review: "Review",
   done: "Done",
 };
-
-const initialTasks = [
-  {
-    id: "t1",
-    title: "Finalize campaign brief",
-    status: "todo",
-    owner: "Ava",
-    due: "Fri",
-  },
-  {
-    id: "t2",
-    title: "Design ad creatives",
-    status: "inprogress",
-    owner: "Leo",
-    due: "Thu",
-  },
-  {
-    id: "t3",
-    title: "Press kit assets",
-    status: "review",
-    owner: "Jordan",
-    due: "Wed",
-  },
-  {
-    id: "t4",
-    title: "Goals and KPIs aligned",
-    status: "done",
-    owner: "Team",
-    due: "Completed",
-  },
-];
 
 const state = {
   tasks: [],
@@ -55,25 +22,6 @@ const openValue = document.getElementById("openValue");
 const openCaption = document.getElementById("openCaption");
 const focusValue = document.getElementById("focusValue");
 const focusCaption = document.getElementById("focusCaption");
-
-function loadTasks() {
-  const raw = window.localStorage.getItem(STORAGE_KEY);
-  if (!raw) {
-    state.tasks = initialTasks;
-    saveTasks();
-    return;
-  }
-  try {
-    const parsed = JSON.parse(raw);
-    state.tasks = Array.isArray(parsed) ? parsed : initialTasks;
-  } catch (error) {
-    state.tasks = initialTasks;
-  }
-}
-
-function saveTasks() {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.tasks));
-}
 
 function createTaskElement(task) {
   const card = document.createElement("div");
@@ -96,8 +44,8 @@ function createTaskElement(task) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.checked = task.status === "done";
-  checkbox.addEventListener("change", () => {
-    updateTask(task.id, {
+  checkbox.addEventListener("change", async () => {
+    await updateTask(task.id, {
       status: checkbox.checked ? "done" : "todo",
     });
   });
@@ -119,18 +67,18 @@ function createTaskElement(task) {
     }
     statusSelect.appendChild(option);
   });
-  statusSelect.addEventListener("change", () => {
-    updateTask(task.id, { status: statusSelect.value });
+  statusSelect.addEventListener("change", async () => {
+    await updateTask(task.id, { status: statusSelect.value });
   });
 
   const editButton = document.createElement("button");
   editButton.className = "btn small";
   editButton.type = "button";
   editButton.textContent = "Edit";
-  editButton.addEventListener("click", () => {
+  editButton.addEventListener("click", async () => {
     const updated = window.prompt("Update task title", task.title);
     if (updated && updated.trim()) {
-      updateTask(task.id, { title: updated.trim() });
+      await updateTask(task.id, { title: updated.trim() });
     }
   });
 
@@ -138,9 +86,9 @@ function createTaskElement(task) {
   deleteButton.className = "btn small ghost";
   deleteButton.type = "button";
   deleteButton.textContent = "Delete";
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", async () => {
     if (window.confirm("Delete this task?")) {
-      deleteTask(task.id);
+      await deleteTask(task.id);
     }
   });
 
@@ -219,41 +167,73 @@ function updateCounts(filtered) {
       : "Start with the next priority";
 }
 
-function addTask(title, status) {
+async function addTask(title, status) {
   const trimmed = title.trim();
   if (!trimmed) return;
 
-  const newTask = {
-    id: `t${Date.now()}`,
-    title: trimmed,
-    status,
-    owner: "You",
-    due: "Soon",
-  };
+  try {
+    const response = await fetch("/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: trimmed,
+        status,
+        owner: "You",
+        due: "Soon",
+      }),
+    });
 
-  state.tasks = [newTask, ...state.tasks];
-  saveTasks();
-  renderTasks();
+    if (!response.ok) {
+      throw new Error("Failed to create task.");
+    }
+
+    await loadTasks();
+  } catch (error) {
+    console.error(error);
+    alert("Could not create task.");
+  }
 }
 
-function updateTask(id, updates) {
-  state.tasks = state.tasks.map((task) =>
-    task.id === id ? { ...task, ...updates } : task
-  );
-  saveTasks();
-  renderTasks();
+async function updateTask(id, updates) {
+  try {
+    const response = await fetch(`/api/tasks/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update task.");
+    }
+
+    await loadTasks();
+  } catch (error) {
+    console.error(error);
+    alert("Could not update task.");
+  }
 }
 
-function deleteTask(id) {
-  state.tasks = state.tasks.filter((task) => task.id !== id);
-  saveTasks();
-  renderTasks();
+async function deleteTask(id) {
+  try {
+    const response = await fetch(`/api/tasks/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok && response.status !== 204) {
+      throw new Error("Failed to delete task.");
+    }
+
+    await loadTasks();
+  } catch (error) {
+    console.error(error);
+    alert("Could not delete task.");
+  }
 }
 
 function wireEvents() {
-  taskForm.addEventListener("submit", (event) => {
+  taskForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    addTask(taskTitleInput.value, taskStatusSelect.value);
+    await addTask(taskTitleInput.value, taskStatusSelect.value);
     taskTitleInput.value = "";
     taskTitleInput.focus();
   });
@@ -264,6 +244,20 @@ function wireEvents() {
   });
 }
 
-loadTasks();
+async function loadTasks() {
+  try {
+    const response = await fetch("/api/tasks");
+    if (!response.ok) {
+      throw new Error("Failed to load tasks.");
+    }
+    state.tasks = await response.json();
+  } catch (error) {
+    console.error(error);
+    state.tasks = [];
+  }
+
+  renderTasks();
+}
+
 wireEvents();
-renderTasks();
+loadTasks();
