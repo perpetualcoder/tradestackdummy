@@ -178,6 +178,35 @@ body {
   align-items: center;
 }
 
+.task-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+
+.task-form input,
+.task-form select {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.task-form input {
+  min-width: 180px;
+}
+
+.task-form select {
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .search {
   display: flex;
   align-items: center;
@@ -206,6 +235,12 @@ body {
   padding: 10px 16px;
   border-radius: 12px;
   font-weight: 600;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  border-radius: 10px;
 }
 
 .btn.primary {
@@ -289,6 +324,35 @@ body {
   gap: 6px;
 }
 
+.task-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.task-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.task-check input {
+  accent-color: var(--olive);
+}
+
+.status-select {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+}
+
 .task.highlight {
   border-color: rgba(85, 107, 47, 0.5);
   box-shadow: 0 12px 20px rgba(35, 55, 15, 0.35);
@@ -318,6 +382,11 @@ body {
 
   .summary {
     grid-template-columns: 1fr;
+  }
+
+  .task-form {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .board {

@@ -76,28 +76,44 @@
           <div class="topbar-actions">
             <div class="search">
               <span class="icon">⌕</span>
-              <input type="text" placeholder="Search tasks" />
+              <input id="searchInput" type="text" placeholder="Search tasks" />
             </div>
-            <button class="btn ghost">Share</button>
-            <button class="btn primary">New Task</button>
+            <form id="taskForm" class="task-form">
+              <input
+                id="taskTitle"
+                type="text"
+                placeholder="Add a task"
+                maxlength="80"
+                required
+              />
+              <select id="taskStatus">
+                <option value="todo">To Do</option>
+                <option value="inprogress">In Progress</option>
+                <option value="review">Review</option>
+                <option value="done">Done</option>
+              </select>
+              <button class="btn primary" type="submit">Add Task</button>
+            </form>
           </div>
         </header>
 
         <section class="summary">
           <div class="card">
             <div class="card-title">Progress</div>
-            <div class="card-value">68%</div>
-            <div class="card-caption">On track for launch</div>
+            <div class="card-value" id="progressValue">0%</div>
+            <div class="card-caption" id="progressCaption">No tasks yet</div>
           </div>
           <div class="card">
             <div class="card-title">Open Tasks</div>
-            <div class="card-value">14</div>
-            <div class="card-caption">3 due this week</div>
+            <div class="card-value" id="openValue">0</div>
+            <div class="card-caption" id="openCaption">Add your first task</div>
           </div>
           <div class="card">
             <div class="card-title">Team Focus</div>
-            <div class="card-value">Brand</div>
-            <div class="card-caption">Landing page refresh</div>
+            <div class="card-value" id="focusValue">Planning</div>
+            <div class="card-caption" id="focusCaption">
+              Keep momentum with quick wins
+            </div>
           </div>
         </section>
 
@@ -105,76 +121,37 @@
           <div class="column">
             <div class="column-header">
               <span>To Do</span>
-              <span class="count">5</span>
+              <span class="count" data-count="todo">0</span>
             </div>
-            <div class="task">
-              <div class="task-title">Finalize campaign brief</div>
-              <div class="task-meta">Owner: Ava · Due Fri</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Landing page wireframe review</div>
-              <div class="task-meta">Owner: Jordan · Due Tue</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Competitive teardown</div>
-              <div class="task-meta">Owner: Priya · Due Wed</div>
-            </div>
+            <div class="task-list" data-status="todo"></div>
           </div>
 
           <div class="column">
             <div class="column-header">
               <span>In Progress</span>
-              <span class="count">4</span>
+              <span class="count" data-count="inprogress">0</span>
             </div>
-            <div class="task highlight">
-              <div class="task-title">Design ad creatives</div>
-              <div class="task-meta">Owner: Leo · Due Thu</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Messaging architecture</div>
-              <div class="task-meta">Owner: Kim · Due Fri</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Build email nurture sequence</div>
-              <div class="task-meta">Owner: Ava · Due Mon</div>
-            </div>
+            <div class="task-list" data-status="inprogress"></div>
           </div>
 
           <div class="column">
             <div class="column-header">
               <span>Review</span>
-              <span class="count">3</span>
+              <span class="count" data-count="review">0</span>
             </div>
-            <div class="task">
-              <div class="task-title">Influencer shortlist</div>
-              <div class="task-meta">Owner: Priya · Due Tue</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Press kit assets</div>
-              <div class="task-meta">Owner: Jordan · Due Wed</div>
-            </div>
-            <div class="task">
-              <div class="task-title">Event run-of-show</div>
-              <div class="task-meta">Owner: Leo · Due Thu</div>
-            </div>
+            <div class="task-list" data-status="review"></div>
           </div>
 
           <div class="column">
             <div class="column-header">
               <span>Done</span>
-              <span class="count">2</span>
+              <span class="count" data-count="done">0</span>
             </div>
-            <div class="task done">
-              <div class="task-title">Launch checklist draft</div>
-              <div class="task-meta">Owner: Ava · Completed</div>
-            </div>
-            <div class="task done">
-              <div class="task-title">Goals and KPIs aligned</div>
-              <div class="task-meta">Owner: Team · Completed</div>
-            </div>
+            <div class="task-list" data-status="done"></div>
           </div>
         </section>
       </main>
     </div>
+    <script src="app.js"></script>
   </body>
 </html>
