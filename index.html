@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Olive Task — Simple Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-mark"></div>
+          <div>
+            <div class="brand">Olive Task</div>
+            <div class="tagline">Focus on what matters</div>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="section-title">Workspace</div>
+          <button class="nav-item active">
+            <span class="dot"></span>
+            My Tasks
+          </button>
+          <button class="nav-item">
+            <span class="dot"></span>
+            Inbox
+          </button>
+          <button class="nav-item">
+            <span class="dot"></span>
+            Calendar
+          </button>
+        </div>
+
+        <div class="nav-section">
+          <div class="section-title">Projects</div>
+          <button class="nav-item">
+            <span class="pill">MG</span>
+            Marketing Growth
+          </button>
+          <button class="nav-item">
+            <span class="pill">PD</span>
+            Product Design
+          </button>
+          <button class="nav-item">
+            <span class="pill">OP</span>
+            Ops & Launch
+          </button>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="invite">Invite teammates</div>
+          <div class="user">
+            <div class="avatar">AK</div>
+            <div>
+              <div class="name">Ava Kim</div>
+              <div class="role">Team Lead</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="title">Marketing Growth</div>
+            <div class="subtitle">Q1 launch tasks and priorities</div>
+          </div>
+          <div class="topbar-actions">
+            <div class="search">
+              <span class="icon">⌕</span>
+              <input type="text" placeholder="Search tasks" />
+            </div>
+            <button class="btn ghost">Share</button>
+            <button class="btn primary">New Task</button>
+          </div>
+        </header>
+
+        <section class="summary">
+          <div class="card">
+            <div class="card-title">Progress</div>
+            <div class="card-value">68%</div>
+            <div class="card-caption">On track for launch</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Open Tasks</div>
+            <div class="card-value">14</div>
+            <div class="card-caption">3 due this week</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Team Focus</div>
+            <div class="card-value">Brand</div>
+            <div class="card-caption">Landing page refresh</div>
+          </div>
+        </section>
+
+        <section class="board">
+          <div class="column">
+            <div class="column-header">
+              <span>To Do</span>
+              <span class="count">5</span>
+            </div>
+            <div class="task">
+              <div class="task-title">Finalize campaign brief</div>
+              <div class="task-meta">Owner: Ava · Due Fri</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Landing page wireframe review</div>
+              <div class="task-meta">Owner: Jordan · Due Tue</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Competitive teardown</div>
+              <div class="task-meta">Owner: Priya · Due Wed</div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="column-header">
+              <span>In Progress</span>
+              <span class="count">4</span>
+            </div>
+            <div class="task highlight">
+              <div class="task-title">Design ad creatives</div>
+              <div class="task-meta">Owner: Leo · Due Thu</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Messaging architecture</div>
+              <div class="task-meta">Owner: Kim · Due Fri</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Build email nurture sequence</div>
+              <div class="task-meta">Owner: Ava · Due Mon</div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="column-header">
+              <span>Review</span>
+              <span class="count">3</span>
+            </div>
+            <div class="task">
+              <div class="task-title">Influencer shortlist</div>
+              <div class="task-meta">Owner: Priya · Due Tue</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Press kit assets</div>
+              <div class="task-meta">Owner: Jordan · Due Wed</div>
+            </div>
+            <div class="task">
+              <div class="task-title">Event run-of-show</div>
+              <div class="task-meta">Owner: Leo · Due Thu</div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="column-header">
+              <span>Done</span>
+              <span class="count">2</span>
+            </div>
+            <div class="task done">
+              <div class="task-title">Launch checklist draft</div>
+              <div class="task-meta">Owner: Ava · Completed</div>
+            </div>
+            <div class="task done">
+              <div class="task-title">Goals and KPIs aligned</div>
+              <div class="task-meta">Owner: Team · Completed</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
